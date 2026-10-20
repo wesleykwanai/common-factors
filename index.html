@@ -29,6 +29,7 @@ section.page{display:grid;gap:22px}.card{background:var(--surface);border:1px so
 .bag{border:2px solid var(--line);border-radius:14px;padding:12px;background:var(--surface)}.bag.ga{border-color:var(--a)}.bag.gb{border-color:var(--b)}.bag h3{font-size:19px}
 .dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:34px}.dot{width:26px;height:26px;border-radius:50%;display:inline-grid;place-items:center;font:700 13px var(--num);color:#fff}.dot.g{background:var(--a)}.dot.p{background:var(--b)}.dot.left{background:var(--bad)}.dot.dim{opacity:.25}
 .rowlist{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.nchip{font:700 19px var(--num);border:2px solid var(--line);border-radius:12px;padding:2px 14px;background:var(--surface)}.nchip.f{background:var(--factor-soft);border-color:var(--factor);color:var(--factor)}.nchip.hit{background:var(--factor);color:#fff;border-color:var(--factor)}.nchip.gold{background:var(--star);border-color:var(--star);color:#3a2c00;box-shadow:0 0 0 3px var(--star-soft)}
+#mList .nchip{background:#dbeafe;border-color:#1d4ed8;color:#1d4ed8}
 .feedback{padding:12px 16px;border-radius:12px;font-size:20px}.feedback.okf{background:var(--ok-soft)}.feedback.badf{background:var(--bad-soft)}.pop{animation:pop .4s ease-out}@keyframes pop{0%{transform:scale(.94)}60%{transform:scale(1.03)}100%{transform:scale(1)}}
 .question{font-size:clamp(26px,5vw,38px);font-family:var(--display);font-weight:700}.choices{display:grid;gap:10px}.choices .btn{text-align:left;font-size:20px}
 .ox{display:flex;gap:12px}.ox .btn{flex:1;font-size:28px;padding:14px}
@@ -58,7 +59,7 @@ input.ans{font:700 26px var(--num);padding:8px 14px;border:2px solid var(--line)
 </style></head><body><div class="wrap">
 <header class="top"><div><h1>公因數</h1><div class="sub">小四數學・互動課堂｜4N4 公倍數和公因數（只學公因數部分）</div></div>
 <div class="legend"><span class="chip-key f">藍色＝因數</span><span class="chip-key a">綠色＝甲袋</span><span class="chip-key b">紫色＝乙袋</span><span class="chip-key s">金色＝最大公因數</span></div></header>
-<nav class="tabs" role="tablist"><button class="tab" data-p="p1" role="tab" aria-selected="true">① 因數回顧</button><button class="tab" data-p="p2" role="tab" aria-selected="false">② 兩袋分完</button><button class="tab" data-p="p3" role="tab" aria-selected="false">③ 最大公因數＋兩種方法</button><button class="tab" data-p="p4" role="tab" aria-selected="false">④ 練習區</button></nav>
+<nav class="tabs" role="tablist"><button class="tab" data-p="p1" role="tab" aria-selected="true">① 因數回顧</button><button class="tab" data-p="p2" role="tab" aria-selected="false">② 兩袋分完</button><button class="tab" data-p="p3" role="tab" aria-selected="false">③ 最大公因數</button><button class="tab" data-p="p4" role="tab" aria-selected="false">④ 練習區</button></nav>
 
 <!-- P1 -->
 <section class="page" id="p1"><p class="progress">第 <i class="on"></i><i></i><i></i> 步｜今日目標：你可以說出「6 是 12 和 18 的公因數」</p>
@@ -111,23 +112,15 @@ input.ans{font:700 26px var(--num);padding:8px 14px;border:2px solid var(--line)
 <div id="vAnsWrap" hidden><p><strong>正確答案如下：</strong></p><div class="venn game"><div class="vbox vleft"><h4 class="ca" id="vzAL">只屬於 12 的因數</h4><div class="rowlist" id="vAnsL"></div></div><div class="vbox vmid"><h4>⭐ 重疊部分＝公因數</h4><div class="rowlist" id="vAnsM"></div></div><div class="vbox vright"><h4 class="cb" id="vzAR">只屬於 18 的因數</h4><div class="rowlist" id="vAnsR"></div></div></div></div></div></section>
 
 <!-- P3 -->
-<section class="page" id="p3" hidden><p class="progress">第 <i class="on"></i><i class="on"></i><i class="on"></i> 步｜最大的一個＋兩種方法</p>
+<section class="page" id="p3" hidden><p class="progress">第 <i class="on"></i><i class="on"></i><i class="on"></i> 步｜最大的一個＋列舉法</p>
 <div class="card"><h2>最大公因數 <span class="muted" style="font-size:16px">H.C.F.</span></h2>
 <p class="lead">12 和 18 的公因數是 <span class="f n">1、2、3、6</span>。其中最大的一個是 <span class="n" style="background:var(--star);color:#3a2c00;padding:0 10px;border-radius:8px">6</span>，叫做<strong>最大公因數</strong> <span class="muted">H.C.F. (Highest Common Factor)</span>。</p>
 <div class="tip"><strong>建議方法：</strong>求最大公因數，要<strong>從較小的數開始倒數</strong>（12 → 11 → … → 6），第一個兩邊都能除盡的數就是最大公因數。（求公倍數則相反：從較大的數開始順數。）</div></div>
-<div class="card"><h2>兩種方法</h2>
-<div class="seg" style="margin-bottom:6px"><button id="segL" class="on">列舉法</button><button id="segS">剝皮機（短除法）</button></div>
-<div id="mList"><p class="lead">把兩個數的因數全部寫出來，圈出相同的數：</p>
-<div class="rowlist" id="lA"></div><div class="rowlist" id="lB"></div>
+<div class="card"><h2>列舉法</h2>
+<div id="mList"><p class="lead">把兩個數的因數全部寫出來，看一看有哪些相同的數：</p>
+<div class="rowlist" id="lA"><span class="nchip f">1</span><span class="nchip f">2</span><span class="nchip f">3</span><span class="nchip f">4</span><span class="nchip f">6</span><span class="nchip f">12</span></div><div class="rowlist" id="lB"><span class="nchip f">1</span><span class="nchip f">2</span><span class="nchip f">3</span><span class="nchip f">6</span><span class="nchip f">9</span><span class="nchip f">18</span></div>
 <div class="caption" id="lCap">12 的因數：1、2、3、4、6、12；18 的因數：1、2、3、6、9、18。相同的數是 <strong class="f">1、2、3、6</strong>，最大的是 <strong>6</strong>。</div></div>
-<div id="mShort" hidden><p class="lead">🍪 剝皮機：把兩袋餅乾一起放入機器，每次選擇一個<strong>兩邊都能除盡</strong>的數來除，直至無法再除為止。</p>
-<div class="eqhero" style="font-size:20px"><span class="tok"><span class="box g" id="sA">12</span><span class="tag ca">甲</span></span><span class="op">·</span><span class="tok"><span class="box p" id="sB">18</span><span class="tag cb">乙</span></span></div>
-<p><strong>選擇一個公因數來「剝」：</strong></p><div class="btnrow" id="sBtns"></div>
-<div class="caption" id="sCap">按上面的數字開始剝皮。記住：<strong>必須兩邊都能除盡</strong>才可以剝。</div>
-<p>已剝下的數：<span class="n f" id="sLog">（未開始）</span></p>
-<p class="lead" id="sAns"></p>
-<div class="btnrow"><button class="btn" id="sReset">↺ 重新開始</button></div>
-<details class="teacher"><summary>教學小提示（老師睇）</summary>短除法只是計算得更快，不需要解釋背後的原理（課程不要求證明）。學生提問時可以回答：把剝出來的因數相乘，就是最大公因數。最常見的錯誤：剝完後寫下最後的 2 和 3——應該把 2 × 3 = 6 乘起來才是答案。</details></div></div>
+</div>
 <div class="card"><h2>兩種特別情況（懂得說明即可，不考核）</h2>
 <p>① <span class="n">3 和 12</span>：大數是小數的倍數 → 最大公因數就是較小的數 <span class="n">3</span>。② <span class="n">8 和 15</span>：公因數只有 <span class="n">1</span>。</p></div></section>
 
@@ -270,23 +263,6 @@ if(!bad.length&&!stay.length&&!missing.length){var commons=vUnion.filter(functio
 else{fb.className="caption badc";var h=cheer()+"<br>尚未完全正確：";if(bad.length)h+="放錯圓圈："+bad.sort(function(x,y){return x-y}).join("、")+"；";if(stay.length)h+="數字池內還有未歸位的數："+stay.sort(function(x,y){return x-y}).join("、")+"；";if(missing.length)h+="還缺少："+missing.slice(0,8).join("、")+"。";h+="<br>請想一想：<strong>必須兩邊都能除盡，才可以放入中間</strong>。";fb.innerHTML=h;}vShowAnswer();};
 vDeal();
 /* ---- P3 ---- */
-$("#segL").onclick=function(){$("#segL").classList.add("on");$("#segS").classList.remove("on");$("#mList").hidden=false;$("#mShort").hidden=true;};
-$("#segS").onclick=function(){$("#segS").classList.add("on");$("#segL").classList.remove("on");$("#mList").hidden=true;$("#mShort").hidden=false;};
-$("#lA").innerHTML=factors(12).map(function(f){return '<span class="nchip f">'+f+"</span>"}).join("");
-$("#lB").innerHTML=factors(18).map(function(f){return '<span class="nchip f">'+f+"</span>"}).join("");
-var cA=12,cB=18,peeled=[];
-function shortBtns(){var g=[];for(var d=2;d<=Math.min(cA,cB);d++)if(cA%d===0&&cB%d===0)g.push(d);
-var box=$("#sBtns");box.innerHTML=g.length?"":'<span class="muted">已經沒有可以再剝的數（公因數只剩下 1），可以結算了！</span>';
-g.forEach(function(d){var b=document.createElement("button");b.className="btn";b.innerHTML='<span class="n">'+d+"</span>";b.onclick=function(){peel(d)};box.appendChild(b);});
-$("#sA").textContent=cA;$("#sB").textContent=cB;
-$("#sLog").textContent=peeled.length?peeled.join(" × "):"（未開始）";
-if(!g.length&&peeled.length){var h=peeled.reduce(function(x,y){return x*y},1);$("#sAns").innerHTML='🎉 完成！HCF = <span class="n f">'+peeled.join(" × ")+" = "+h+"</span>";}
-else if(!g.length){$("#sAns").innerHTML='🎉 本來已經沒有公因數（除了 1），HCF = <span class="n f">1</span>';}
-else $("#sAns").innerHTML="";}
-function peel(d){if(cA%d!==0||cB%d!==0){var c=$("#sCap");c.className="caption badc";c.innerHTML="<strong>"+d+" 不可以！</strong>"+(cA%d!==0?"甲袋 "+cA+" ÷ "+d+" 有餘數。":"")+(cB%d!==0?"乙袋 "+cB+" ÷ "+d+" 有餘數。":"")+"短除法必須兩邊都能除盡才可以除。再試一次，你一定做得到！";return;}
-peeled.push(d);cA/=d;cB/=d;var c=$("#sCap");c.className="caption okc";c.innerHTML="正確！兩邊都能除盡。繼續剝，看看還有沒有公因數。";shortBtns();}
-$("#sReset").onclick=function(){cA=12;cB=18;peeled=[];$("#sCap").className="caption";$("#sCap").textContent="按上面的數字開始剝皮。記住：<strong>必須兩邊都能除盡</strong>才可以剝。";shortBtns();};
-shortBtns();
 /* ---- P4 ---- */
 var score={r:0,t:0},cur="t1",LV=2,custom=null,hintLv=0;
 var H={t1:["想一想：公因數必須兩邊都能除盡。","試一試驗算 18 ÷ 6 能否除盡？","答案與 6 有關，請說明為甚麼兩邊都符合。"]};
@@ -317,12 +293,12 @@ var row=document.createElement("div");row.className="rowlist";var mx=Math.max(a,
 var go2=document.createElement("button");go2.className="btn primary";go2.textContent="交卷";go2.style.marginTop="12px";go2.onclick=function(){var got=$$("#qBody .pill.on").map(function(e){return +e.dataset.v}).sort(function(x,y){return x-y});var ok=JSON.stringify(got)===JSON.stringify(commons);score.t++;if(ok)score.r++;updScore();fb(ok,"答案："+commons.join("、")+"，最大的是 "+g+"。");};
 B.appendChild(row);B.appendChild(go2);}
 else if(cur==="t4"){QA=g;T.innerHTML='<span class="n">'+a+'</span> 和 <span class="n">'+b+'</span> 的最大公因數是多少？';
-B.innerHTML='<input class="ans" id="ans4" inputmode="numeric"> <button class="btn primary" id="go4">確定</button><p class="muted">小幫手：先寫出兩邊的因數，或用剝皮機由小數開始倒數。最大的一個才是答案。</p>';
+B.innerHTML='<input class="ans" id="ans4" inputmode="numeric"> <button class="btn primary" id="go4">確定</button><p class="muted">小幫手：先寫出兩邊的因數，或由小數開始倒數。最大的一個才是答案。</p>';
 $("#go4").onclick=function(){var v=+$("#ans4").value;var ok=v===g;score.t++;if(ok)score.r++;updScore();if(!ok&&commons.indexOf(v)>=0)fb(false,"<strong>"+v+" 是公因數沒有錯，但不是最大的！</strong>由 "+Math.min(a,b)+" 開始倒數，第一個兩邊都符合的才是。答案是 "+g+"。");else if(!ok&&v>a&&v>b)fb(false,"<strong>"+v+" 那是求公倍數的想法。</strong>記住：倍數數不完，因數才能數得完。答案是 "+g+"。");else fb(ok,"HCF = "+g+"（公因數 "+commons.join("、")+" 中最大的一個）。");};}
 else if(cur==="t5"){QA="B";T.innerHTML='為甚麼 <span class="n">4</span> 不是 <span class="n">12</span> 和 <span class="n">18</span> 的公因數？';
 var opts=["A．因為 4 比 6 小","B．因為 18 ÷ 4 有餘數，兩邊並非都能除盡","C．因為 4 不是 12 的因數","D．因為公因數一定是雙數"];var ch=document.createElement("div");ch.className="choices";opts.forEach(function(o){var btn=document.createElement("button");btn.className="btn";btn.textContent=o;btn.onclick=function(){var ok=o.charAt(0)==="B";score.t++;if(ok)score.r++;updScore();fb(ok,"12 ÷ 4 = 3 能除盡，但 18 ÷ 4 = 4 … 2 有餘數。<strong>必須兩邊都能除盡</strong>才是公因數。");};ch.appendChild(btn);});B.appendChild(ch);}
-else{QA="C";T.innerHTML='小明用剝皮機求 12 和 18：<span class="n">12 ÷ 4 = 3，18 ÷ 4 = 4 … 2</span>，他照樣剝下去。錯在哪裡？';
-var o2=["A．不應該用除法","B．答案要寫 3 和 4","C．4 不是 18 的因數，兩邊並非都能除盡，不可以剝","D．應該一次過除以 12"];var ch2=document.createElement("div");ch2.className="choices";o2.forEach(function(o){var btn=document.createElement("button");btn.className="btn";btn.textContent=o;btn.onclick=function(){var ok=o.charAt(0)==="C";score.t++;if(ok)score.r++;updScore();fb(ok,"剝皮機的規則：<strong>必須兩邊都能除盡</strong>。4 是 12 的因數，但不是 18 的因數，所以不能剝。應該選擇 2 或 3。");};ch2.appendChild(btn);});B.appendChild(ch2);}
+else{QA="C";T.innerHTML='小明求 12 和 18 的最大公因數：<span class="n">12 ÷ 4 = 3，18 ÷ 4 = 4 … 2</span>，他照樣剝下去。錯在哪裡？';
+var o2=["A．不應該用除法","B．答案要寫 3 和 4","C．4 不是 18 的因數，兩邊並非都能除盡","D．應該一次過除以 12"];var ch2=document.createElement("div");ch2.className="choices";o2.forEach(function(o){var btn=document.createElement("button");btn.className="btn";btn.textContent=o;btn.onclick=function(){var ok=o.charAt(0)==="C";score.t++;if(ok)score.r++;updScore();fb(ok,"記住：<strong>必須兩邊都能除盡</strong>。4 是 12 的因數，但不是 18 的因數，所以不能把 4 當作公因數。應該選擇 2 或 3。");};ch2.appendChild(btn);});B.appendChild(ch2);}
 if(score.t>0&&score.t%10===0){var d=document.createElement("div");d.className="card";d.innerHTML="<h3>本次成績</h3><p class='lead'>總共答對 <strong class='n'>"+score.r+"</strong> / "+score.t+" 題。</p>";$("#qFb").appendChild(d);}}
 $("#nextBtn").onclick=function(){if(Math.random()<.15){}newQ();};
 $("#hintBtn").onclick=function(){var arr=H[Object.keys(H)[0]];var d=document.createElement("div");d.className="caption";d.textContent=arr[Math.min(hintLv,arr.length-1)];$("#qHint").appendChild(d);hintLv++;};
