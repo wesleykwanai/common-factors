@@ -1,0 +1,331 @@
+﻿<!doctype html><html lang="zh-Hant-HK"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>公因數｜小四數學・互動課堂</title>
+<style>
+:root{--bg:#f3f7f6;--grid:rgba(58,110,118,.075);--surface:#fff;--surface-2:#edf3f2;--ink:#1d2b31;--muted:#5a6a70;--line:#d3dfdd;--factor:#2463a8;--factor-soft:#e2edfa;--a:#25845a;--a-soft:#e0f2e8;--b:#7347b8;--b-soft:#eee6fa;--ok:#25845a;--ok-soft:#e0f2e8;--bad:#c03a3a;--bad-soft:#fbe6e6;--star:#e3a00f;--star-soft:#fdf3d7;--display:"LXGW WenKai TC","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;--body:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;--num:"Fredoka","Noto Sans TC",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12191c;--grid:rgba(140,190,195,.06);--surface:#1a2427;--surface-2:#223035;--ink:#e6eef0;--muted:#9db0b5;--line:#33454b;--factor:#72aaf0;--factor-soft:#1b2d44;--a:#5cc68f;--a-soft:#173327;--b:#ae8ceb;--b-soft:#2a2040;--ok:#5cc68f;--ok-soft:#173327;--bad:#f07a7a;--bad-soft:#3a1d1f;--star:#f4bf3a;--star-soft:#3a2f14;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#12191c;--grid:rgba(140,190,195,.06);--surface:#1a2427;--surface-2:#223035;--ink:#e6eef0;--muted:#9db0b5;--line:#33454b;--factor:#72aaf0;--factor-soft:#1b2d44;--a:#5cc68f;--a-soft:#173327;--b:#ae8ceb;--b-soft:#2a2040;--ok:#5cc68f;--ok-soft:#173327;--bad:#f07a7a;--bad-soft:#3a1d1f;--star:#f4bf3a;--star-soft:#3a2f14;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{background-color:var(--bg);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:28px 28px;color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.7;margin:0}
+.wrap{max-width:1040px;margin:0 auto;padding:20px 16px 60px}
+h1{font-family:var(--display);font-size:clamp(30px,5vw,44px);margin:0}h2{font-family:var(--display);font-size:clamp(24px,3.6vw,32px);margin:0}h3{font-size:22px;margin:0;font-family:var(--display)}
+.n{font-family:var(--num);font-weight:600;font-variant-numeric:tabular-nums}.f{color:var(--factor);font-weight:700}.ca{color:var(--a);font-weight:700}.cb{color:var(--b);font-weight:700}.muted{color:var(--muted)}
+header.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 20px;margin-bottom:14px}
+.sub{color:var(--muted);font-size:16px}.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:15px}
+.chip-key{display:inline-flex;align-items:center;gap:6px;padding:2px 12px;border-radius:999px;font-weight:700;background:var(--surface-2)}
+.chip-key.f{background:var(--factor-soft)}.chip-key.a{background:var(--a-soft)}.chip-key.b{background:var(--b-soft)}.chip-key.s{background:var(--star-soft)}
+.frog{height:2.4em;vertical-align:-.65em;margin-right:.2em}
+nav.tabs{position:sticky;top:0;z-index:5;display:flex;gap:6px;overflow-x:auto;padding:8px;margin:0 -8px 18px;background:var(--bg);border-bottom:2px solid var(--line)}
+.tab{flex:0 0 auto;border:0;background:transparent;color:var(--muted);font:700 18px var(--display);padding:8px 16px;border-radius:12px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+section.page{display:grid;gap:22px}.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:22px}.card>*+*{margin-top:12px}.lead{font-size:20px}
+.eqhero{display:flex;flex-wrap:wrap;justify-content:center;align-items:flex-start;gap:10px 18px;padding:10px 0}.eqhero .tok{display:grid;justify-items:center;gap:6px}.eqhero .box{font-family:var(--num);font-weight:700;font-size:clamp(40px,8vw,64px);line-height:1;padding:14px 22px;border-radius:16px;min-width:1.6em;text-align:center;background:var(--surface-2)}.eqhero .box.f{background:var(--factor-soft);color:var(--factor)}.eqhero .box.g{background:var(--a-soft);color:var(--a)}.eqhero .box.p{background:var(--b-soft);color:var(--b)}.eqhero .op{font-family:var(--num);font-size:clamp(34px,6vw,52px);padding-top:14px;color:var(--muted)}.eqhero .tag{font-family:var(--display);font-size:22px;font-weight:700}
+.chant{font-family:var(--display);font-size:24px;text-align:center;padding:14px;border-radius:14px;background:var(--surface-2)}
+.caption{font-size:20px;padding:12px 16px;border-radius:12px;background:var(--surface-2)}.caption.okc{background:var(--ok-soft)}.caption.badc{background:var(--bad-soft)}
+.tip{border-left:5px solid var(--factor);background:var(--factor-soft);border-radius:0 12px 12px 0;padding:10px 14px}.tip.g{border-color:var(--a);background:var(--a-soft)}
+.stepper{display:inline-flex;align-items:center;border:2px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface)}.stepper button{border:0;background:var(--surface-2);color:var(--ink);width:44px;height:44px;font:700 24px var(--num);cursor:pointer}.stepper output{min-width:64px;text-align:center;font:700 26px var(--num)}
+.btn{border:2px solid var(--ink);background:var(--surface);color:var(--ink);font:700 18px var(--body);padding:8px 18px;border-radius:12px;cursor:pointer}.btn.primary{background:var(--ink);color:var(--bg)}.btn:disabled{opacity:.4}.btnrow{display:flex;flex-wrap:wrap;gap:10px}
+.pill{border:2px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:4px 14px;font:600 17px var(--body);cursor:pointer}.pill.on{border-color:var(--factor);background:var(--factor-soft);color:var(--factor)}
+.seg{display:inline-flex;border:2px solid var(--line);border-radius:12px;overflow:hidden}.seg button{border:0;background:var(--surface);padding:8px 18px;font:700 17px var(--body);cursor:pointer;color:var(--muted)}.seg button.on{background:var(--ink);color:var(--bg)}
+.candybox{display:grid;gap:14px}@media(min-width:720px){.candybox{grid-template-columns:1fr 1fr}}
+.bag{border:2px solid var(--line);border-radius:14px;padding:12px;background:var(--surface)}.bag.ga{border-color:var(--a)}.bag.gb{border-color:var(--b)}.bag h3{font-size:19px}
+.dots{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;min-height:34px}.dot{width:26px;height:26px;border-radius:50%;display:inline-grid;place-items:center;font:700 13px var(--num);color:#fff}.dot.g{background:var(--a)}.dot.p{background:var(--b)}.dot.left{background:var(--bad)}.dot.dim{opacity:.25}
+.rowlist{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.nchip{font:700 19px var(--num);border:2px solid var(--line);border-radius:12px;padding:2px 14px;background:var(--surface)}.nchip.f{background:var(--factor-soft);border-color:var(--factor);color:var(--factor)}.nchip.hit{background:var(--factor);color:#fff;border-color:var(--factor)}.nchip.gold{background:var(--star);border-color:var(--star);color:#3a2c00;box-shadow:0 0 0 3px var(--star-soft)}
+.feedback{padding:12px 16px;border-radius:12px;font-size:20px}.feedback.okf{background:var(--ok-soft)}.feedback.badf{background:var(--bad-soft)}.pop{animation:pop .4s ease-out}@keyframes pop{0%{transform:scale(.94)}60%{transform:scale(1.03)}100%{transform:scale(1)}}
+.question{font-size:clamp(26px,5vw,38px);font-family:var(--display);font-weight:700}.choices{display:grid;gap:10px}.choices .btn{text-align:left;font-size:20px}
+.ox{display:flex;gap:12px}.ox .btn{flex:1;font-size:28px;padding:14px}
+.tapgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:8px}@media(max-width:560px){.tapgrid{grid-template-columns:repeat(6,1fr)}}
+.tapgrid button{aspect-ratio:1;border:2px solid var(--line);border-radius:12px;background:var(--surface);font:700 20px var(--num);cursor:pointer;color:var(--ink)}.tapgrid button.on{background:var(--factor);color:#fff;border-color:var(--factor)}
+.rbwrap{margin-top:6px}.rbwrap svg{display:block;width:100%;height:auto}.rbwrap path{fill:none;stroke-width:2.5;opacity:.35}.rbwrap path[data-a="1"]{stroke:var(--factor)}.rbwrap path[data-a="2"]{stroke:var(--a)}.rbwrap path[data-a="3"]{stroke:var(--b)}.rbwrap path.on{opacity:1;stroke-width:4}
+.rbrow{display:grid;grid-template-columns:repeat(6,1fr)}.rbnum{font:700 26px var(--num);border:2px solid var(--factor);background:var(--surface);color:var(--ink);border-radius:12px;padding:6px 4px;margin:0 6px;cursor:pointer}.rbnum.on{background:var(--factor);color:#fff;border-color:var(--factor)}.rbnum.on[data-p="2"]{background:var(--a);border-color:var(--a)}.rbnum.on[data-p="3"]{background:var(--b);border-color:var(--b)}.rbrow.many .rbnum{font-size:20px;margin:0 2px}
+.venn{display:grid;grid-template-columns:1fr .9fr 1fr;align-items:stretch;gap:0;margin:76px 0;position:relative;isolation:isolate}
+.venn::before,.venn::after{content:"";position:absolute;top:-51px;bottom:-51px;width:70%;border-radius:50%;z-index:0;pointer-events:none;opacity:.3}
+.venn::before{left:0;background:var(--a);border:3px solid var(--a)}
+.venn::after{right:0;background:var(--b);border:3px solid var(--b)}.vbox{border:3px solid transparent;background:transparent;border-radius:18px;padding:14px;min-height:160px;text-align:center;position:relative;z-index:1}.vbox h4{margin:0 0 8px;font-size:21px}.venn .rowlist{justify-content:center;gap:10px}.venn .nchip{font-size:34px;padding:6px 14px;min-width:53px;min-height:47px;display:inline-block}.venn .vmid button.q{font-size:34px;padding:6px 14px;min-width:53px;min-height:47px}.vleft{border-color:transparent;background:transparent}.vright{border-color:transparent;background:transparent}.vmid{border-color:transparent;background:transparent;margin:0 -21px;z-index:2;min-width:195px}.vmid button.q{border:2px dashed var(--star);background:var(--surface);border-radius:12px;font:700 19px var(--num);padding:2px 14px;cursor:pointer;color:var(--muted)}
+.pool{display:flex;flex-wrap:wrap;gap:8px;min-height:48px;padding:10px;border:2px dashed var(--line);border-radius:12px;background:var(--surface)}
+.drag{font:700 34px var(--num);border:2px solid var(--factor);background:var(--surface);color:var(--ink);border-radius:14px;padding:6px 14px;min-width:53px;min-height:47px;cursor:grab;user-select:none;touch-action:none}.drag.sel{outline:4px solid var(--star);background:var(--star-soft)}
+.dzone{min-height:150px}.dzone.over{outline:3px dashed var(--factor);outline-offset:-6px}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.ctl{display:inline-flex;align-items:center;gap:8px}
+.venn.game .vbox{min-height:310px;padding:28px}.venn.game .vbox h4{font-size:26px}
+.pool.big{min-height:84px;padding:14px;gap:12px;margin:10px 0 38px}
+.pool .drag{padding:6px 14px;min-width:53px;min-height:47px}
+#vFb{margin-top:38px}
+@media(max-width:640px){.venn,.venn.game{grid-template-columns:1fr}.venn .vmid,.venn.game .vmid{margin:-12px 0}.venn::before,.venn::after{display:none}.venn .vleft{background:var(--a-soft)}.venn .vright{background:var(--b-soft)}.venn .vmid{background:var(--star-soft);border-radius:18px}}
+details.teacher{border:1.5px dashed var(--line);border-radius:12px;padding:10px 14px}details.teacher summary{cursor:pointer;font-weight:700;color:var(--muted)}
+input.ans{font:700 26px var(--num);padding:8px 14px;border:2px solid var(--line);border-radius:12px;width:7em;text-align:center;background:var(--surface);color:var(--ink)}
+.progress{display:flex;gap:6px;align-items:center;font-size:15px;color:var(--muted)}.progress i{width:26px;height:6px;border-radius:3px;background:var(--line)}.progress i.on{background:var(--factor)}
+.minifrog{position:fixed;right:14px;bottom:14px;width:54px;opacity:.85;pointer-events:none;z-index:4}
+@media print{nav.tabs,.settings,.btnrow,.minifrog,.noPrint{display:none!important}section.page{display:grid!important}section.page[hidden]{display:grid!important}body{background:#fff!important;background-image:none!important}}
+@media (prefers-reduced-motion:reduce){.pop{animation:none}}
+</style></head><body><div class="wrap">
+<header class="top"><div><h1>公因數</h1><div class="sub">小四數學・互動課堂｜4N4 公倍數和公因數（只學公因數部分）</div></div>
+<div class="legend"><span class="chip-key f">藍色＝因數</span><span class="chip-key a">綠色＝甲袋</span><span class="chip-key b">紫色＝乙袋</span><span class="chip-key s">金色＝最大公因數</span></div></header>
+<nav class="tabs" role="tablist"><button class="tab" data-p="p1" role="tab" aria-selected="true">① 因數回顧</button><button class="tab" data-p="p2" role="tab" aria-selected="false">② 兩袋分完</button><button class="tab" data-p="p3" role="tab" aria-selected="false">③ 最大公因數＋兩種方法</button><button class="tab" data-p="p4" role="tab" aria-selected="false">④ 練習區</button></nav>
+
+<!-- P1 -->
+<section class="page" id="p1"><p class="progress">第 <i class="on"></i><i></i><i></i> 步｜今日目標：你可以說出「6 是 12 和 18 的公因數」</p>
+<div class="card"><h2>一個算式，重溫甚麼是因數</h2>
+<div class="eqhero"><span class="tok"><span class="box f">3</span><span class="tag f">因數</span></span><span class="op">×</span><span class="tok"><span class="box f">4</span><span class="tag f">因數</span></span><span class="op">=</span><span class="tok"><span class="box">12</span><span class="tag muted">餅乾總數</span></span></div>
+<p class="lead">因為 <span class="n">3 × 4 = 12</span>，所以 <span class="f">3 和 4 是 12 的因數</span>。</p>
+<div class="chant">能夠剛好分完，那個數就是因數</div></div>
+<div class="card"><h2>試一試：12 塊餅乾可以怎樣分？</h2>
+<div class="controls"><span class="ctl">分給 <span class="stepper"><button id="rMinus">−</button><output id="rOut">3</output><button id="rPlus">＋</button></span> 人</span><span class="muted">按 ＋／− ，看看能否剛好分完</span></div>
+<div class="bag ga"><h3 class="ca">甲袋：12 塊餅乾</h3><div class="dots" id="p1dots"></div><p class="muted" id="p1math"></p></div>
+<div class="caption" id="p1cap"></div>
+<div><p><strong>12 的因數（全部）：</strong></p><div class="rowlist" id="p1chips"></div></div>
+<div><p><strong>彩虹法：由 1 開始配對，就不會遺漏</strong></p>
+<div class="rbwrap"><svg id="rbSvg" viewBox="0 0 600 130" aria-hidden="true"><path data-a="1" d="M50,122 Q300,8 550,122"/><path data-a="2" d="M150,122 Q300,52 450,122"/><path data-a="3" d="M250,122 Q300,88 350,122"/></svg>
+<div class="rbrow" id="rbRow"><button class="rbnum" data-v="1" data-p="1">1</button><button class="rbnum" data-v="2" data-p="2">2</button><button class="rbnum" data-v="3" data-p="3">3</button><button class="rbnum" data-v="4" data-p="3">4</button><button class="rbnum" data-v="6" data-p="2">6</button><button class="rbnum" data-v="12" data-p="1">12</button></div></div>
+<div class="caption" id="rbCap">按一按數字，看看它的配對（例如 2 × 6 = 12）。</div></div>
+<div class="card"><h2>🌈 彩虹機：輸入任何數</h2>
+<p class="lead">輸入一個數（2–99），按「畫彩虹」，即時畫出它的因數彩虹。</p>
+<div class="controls"><input class="ans" id="rbN" style="width:5em" inputmode="numeric" placeholder="例如 18"><button class="btn primary" id="rbGo">畫彩虹</button></div>
+<div class="rbwrap"><svg id="rbSvg2" viewBox="0 0 600 130" aria-hidden="true"></svg><div class="rbrow" id="rbRow2"></div></div>
+<div class="caption" id="rbCap2">輸入數字後按「畫彩虹」。若因數有單數個，中間那個會自己配對（例如 6 × 6 = 36）。</div></div>
+<details class="teacher"><summary>教學小提示（老師睇）</summary>請學生完整說一次：「因為 6 × 2 = 12，所以 6 是 12 的因數。」重點：1 和它本身都要數，因數是成雙成對出現的。</details></div></section>
+
+<!-- P2 -->
+<section class="page" id="p2" hidden><p class="progress">第 <i class="on"></i><i class="on"></i><i></i> 步｜兩袋餅乾，同一種分法</p>
+<div class="card"><h2>🧸 兩袋都能剛好分完，就是公因數</h2>
+<p class="lead">🧸大熊有 <span class="ca n">12</span> 塊餅乾，🧸細熊有 <span class="cb n">18</span> 塊餅乾。同一種分法（分給 <span class="n">k</span> 人），兩袋都剛好分完，<span class="n">k</span> 就是公因數。</p>
+<div class="controls"><span class="ctl">分給多少人？ <span class="stepper"><button id="kMinus">−</button><output id="kOut">3</output><button id="kPlus">＋</button></span></span>
+<button class="btn" id="kAuto">▶ 由 12 開始倒數，找出最大公因數</button></div>
+<div class="candybox"><div class="bag ga"><h3 class="ca">🟢 甲袋 12 塊餅乾：<span id="stA"></span></h3><div class="dots" id="dotsA"></div><p id="mathA"></p></div>
+<div class="bag gb"><h3 class="cb">🟣 乙袋 18 塊餅乾：<span id="stB"></span></h3><div class="dots" id="dotsB"></div><p id="mathB"></p></div></div>
+<div class="caption" id="p2cap" aria-live="polite"></div>
+<div><p><strong>12 的因數：</strong></p><div class="rowlist" id="chA"></div></div>
+<div><p><strong>18 的因數：</strong></p><div class="rowlist" id="chB"></div></div>
+<div><p><strong>公因數（兩邊都有 ⭐）：</strong></p><div class="rowlist" id="chC"></div></div>
+<div><p><strong>溫氏圖（中間重疊的部分就是公因數）：按「？」即可試一試那個數</strong></p><div class="venn game"><div class="vbox vleft"><h4 class="ca">只屬於 12 的因數</h4><div class="rowlist" id="vLeft"></div></div><div class="vbox vmid"><h4>⭐ 重疊部分＝公因數</h4><div class="rowlist" id="vMid"></div></div><div class="vbox vright"><h4 class="cb">只屬於 18 的因數</h4><div class="rowlist" id="vRight"></div></div></div></div>
+<div class="chant">兩袋都能剛好分完，就是公因數</div>
+<div class="tip g"><strong>溫馨提示：</strong>公倍數數不完，公因數卻數得完——公因數的數量是有限的。而且 <strong>1 一定是公因數</strong>，千萬不要遺漏。</div>
+<details class="teacher"><summary>教學小提示（老師睇）</summary>逐一試驗每個 k，請學生朗讀提示框的三句話：做了甚麼 → 看見甚麼 → 代表甚麼概念。k = 4 是最佳的反例：12 能剛好分完，但 18 剩下 2 塊，所以 4 不是公因數。</details></div>
+<div class="card"><h2>🧸 溫氏圖挑戰：找出因數 → 拖放歸位</h2>
+<p class="lead">第一步：輸入兩個數（2–100），按「出題」。第二步：在下面輸入你找到的因數，按「加入數字池」。全部找齊後，把數字拖入溫氏圖中正確的圓圈。需要幫助時，可按「提示我一個」，次數不限。</p>
+<div class="controls"><span class="ctl">A <input class="ans" id="vAin" style="width:4em" inputmode="numeric" value="12"></span><span class="ctl">B <input class="ans" id="vBin" style="width:4em" inputmode="numeric" value="18"></span><button class="btn primary" id="vGo">出題</button><button class="btn" id="vHint">💡 提示我一個</button><button class="btn" id="vCheck">✔ 對答案</button><button class="btn" id="vReset">↺ 重置</button></div>
+<p><strong>輸入你找到的因數：</strong></p>
+<div class="controls"><input class="ans" id="vFind" style="width:5em" inputmode="numeric" placeholder="例如 6"><button class="btn primary" id="vAdd">加入數字池</button></div>
+<div class="caption" id="vProg">請先按「出題」。</div>
+<div id="vHintLog"></div>
+<p><strong>數字池（拖入圓圈，或先按數字、再按圓圈）：</strong></p><div class="pool big" id="vPool"></div>
+<div class="venn game"><div class="vbox vleft dzone" id="zL"><h4 class="ca" id="vzL">只屬於 12 的因數</h4></div><div class="vbox vmid dzone" id="zM"><h4>⭐ 重疊部分＝公因數</h4></div><div class="vbox vright dzone" id="zR"><h4 class="cb" id="vzR">只屬於 18 的因數</h4></div></div>
+<div class="caption" id="vFb">提示：<strong>1 一定是公因數</strong>，可以先輸入 1 試試。</div>
+<div id="vAnsWrap" hidden><p><strong>正確答案如下：</strong></p><div class="venn game"><div class="vbox vleft"><h4 class="ca" id="vzAL">只屬於 12 的因數</h4><div class="rowlist" id="vAnsL"></div></div><div class="vbox vmid"><h4>⭐ 重疊部分＝公因數</h4><div class="rowlist" id="vAnsM"></div></div><div class="vbox vright"><h4 class="cb" id="vzAR">只屬於 18 的因數</h4><div class="rowlist" id="vAnsR"></div></div></div></div></div></section>
+
+<!-- P3 -->
+<section class="page" id="p3" hidden><p class="progress">第 <i class="on"></i><i class="on"></i><i class="on"></i> 步｜最大的一個＋兩種方法</p>
+<div class="card"><h2>最大公因數 <span class="muted" style="font-size:16px">H.C.F.</span></h2>
+<p class="lead">12 和 18 的公因數是 <span class="f n">1、2、3、6</span>。其中最大的一個是 <span class="n" style="background:var(--star);color:#3a2c00;padding:0 10px;border-radius:8px">6</span>，叫做<strong>最大公因數</strong> <span class="muted">H.C.F. (Highest Common Factor)</span>。</p>
+<div class="tip"><strong>建議方法：</strong>求最大公因數，要<strong>從較小的數開始倒數</strong>（12 → 11 → … → 6），第一個兩邊都能除盡的數就是最大公因數。（求公倍數則相反：從較大的數開始順數。）</div></div>
+<div class="card"><h2>兩種方法</h2>
+<div class="seg" style="margin-bottom:6px"><button id="segL" class="on">列舉法</button><button id="segS">剝皮機（短除法）</button></div>
+<div id="mList"><p class="lead">把兩個數的因數全部寫出來，圈出相同的數：</p>
+<div class="rowlist" id="lA"></div><div class="rowlist" id="lB"></div>
+<div class="caption" id="lCap">12 的因數：1、2、3、4、6、12；18 的因數：1、2、3、6、9、18。相同的數是 <strong class="f">1、2、3、6</strong>，最大的是 <strong>6</strong>。</div></div>
+<div id="mShort" hidden><p class="lead">🍪 剝皮機：把兩袋餅乾一起放入機器，每次選擇一個<strong>兩邊都能除盡</strong>的數來除，直至無法再除為止。</p>
+<div class="eqhero" style="font-size:20px"><span class="tok"><span class="box g" id="sA">12</span><span class="tag ca">甲</span></span><span class="op">·</span><span class="tok"><span class="box p" id="sB">18</span><span class="tag cb">乙</span></span></div>
+<p><strong>選擇一個公因數來「剝」：</strong></p><div class="btnrow" id="sBtns"></div>
+<div class="caption" id="sCap">按上面的數字開始剝皮。記住：<strong>必須兩邊都能除盡</strong>才可以剝。</div>
+<p>已剝下的數：<span class="n f" id="sLog">（未開始）</span></p>
+<p class="lead" id="sAns"></p>
+<div class="btnrow"><button class="btn" id="sReset">↺ 重新開始</button></div>
+<details class="teacher"><summary>教學小提示（老師睇）</summary>短除法只是計算得更快，不需要解釋背後的原理（課程不要求證明）。學生提問時可以回答：把剝出來的因數相乘，就是最大公因數。最常見的錯誤：剝完後寫下最後的 2 和 3——應該把 2 × 3 = 6 乘起來才是答案。</details></div></div>
+<div class="card"><h2>兩種特別情況（懂得說明即可，不考核）</h2>
+<p>① <span class="n">3 和 12</span>：大數是小數的倍數 → 最大公因數就是較小的數 <span class="n">3</span>。② <span class="n">8 和 15</span>：公因數只有 <span class="n">1</span>。</p></div></section>
+
+<!-- P4 -->
+<section class="page" id="p4" hidden>
+<div class="card settings"><h2>練習區 <span class="muted" id="score" style="font-size:16px">答對 0 / 0 題</span></h2>
+<div class="controls"><span class="ctl">難度 <span class="pill" data-lv="1">Lv1 較小</span><span class="pill on" data-lv="2">Lv2 中等</span><span class="pill" data-lv="3">Lv3 較大</span></span>
+<span class="ctl">自訂 <input class="ans" id="cA" style="width:4em" inputmode="numeric" placeholder="12"> ＋ <input class="ans" id="cB" style="width:4em" inputmode="numeric" placeholder="18"> <button class="btn" id="cSet">使用這一組</button></span>
+<button class="btn" id="scoreReset">分數歸零</button></div></div>
+<div class="card" id="qcard"><div class="btnrow noPrint" id="typeRow"></div>
+<div class="question" id="qTitle"></div><div id="qBody"></div>
+<div class="btnrow"><button class="btn" id="hintBtn">💡 提示</button><button class="btn primary" id="nextBtn">下一題 →</button></div>
+<div id="qHint"></div><div id="qFb"></div></div></section>
+</div>
+<script>(function(){"use strict";
+var $=function(s){return document.querySelector(s)},$$=function(s){return Array.prototype.slice.call(document.querySelectorAll(s))};
+var PRAISE=["答對了！","非常出色！","做得很好！","完全正確！","你的思路非常清晰！"];
+var CHEER=["不要緊，再試一次，你一定做得到！","答錯也是學習的一部分，再想一想！","你已經很接近了，不要放棄！","每一次嘗試都是進步，繼續努力！","慢慢來，再檢查一次！","老師相信你，再挑戰一次！"];function cheer(){return CHEER[Math.floor(Math.random()*CHEER.length)];}
+function factors(n){var r=[];for(var i=1;i<=n;i++)if(n%i===0)r.push(i);return r;}
+function gcd(a,b){while(b){var t=a%b;a=b;b=t;}return a;}
+/* tabs */
+var tabs=$$(".tab");
+function show(id){tabs.forEach(function(t){t.setAttribute("aria-selected",t.dataset.p===id?"true":"false")});$$("section.page").forEach(function(s){s.hidden=s.id!==id});if(location.hash!=="#"+id)history.replaceState(null,"","#"+id);}
+tabs.forEach(function(t){t.onclick=function(){show(t.dataset.p)}});
+if(/^#p[1-4]$/.test(location.hash))show(location.hash.slice(1));
+/* theme btn */
+var tb=document.createElement("button");tb.className="btn";tb.style.cssText="font-size:15px;padding:4px 12px";tb.title="切換深淺色";
+function paint(){tb.textContent=document.documentElement.getAttribute("data-theme")==="dark"?"☀️":"🌙";}
+tb.onclick=function(){var d=document.documentElement.getAttribute("data-theme")==="dark";document.documentElement.setAttribute("data-theme",d?"light":"dark");try{localStorage.setItem("lesson-theme",d?"light":"dark")}catch(e){}paint();};
+document.querySelector("header.top").appendChild(tb);
+try{var th=localStorage.getItem("lesson-theme");if(th)document.documentElement.setAttribute("data-theme",th);}catch(e){}paint();
+/* ---- P1 ---- */
+var R=3;
+function drawDots(el,n,per){var h="";for(var i=0;i<n;i++){var left=i>=per*Math.floor(n/per)&&false;h+='<span class="dot g">'+(i+1)+"</span>";}el.innerHTML=h;}
+function p1(){var N=12;$("#rOut").textContent=R;var ok=N%R===0,q=Math.floor(N/R),rem=N%R;
+var el=$("#p1dots");el.innerHTML="";for(var i=0;i<N;i++){var s=document.createElement("span");var bad=!ok&&i>=N-rem;s.className="dot "+(bad?"left":"g");s.textContent=i+1;el.appendChild(s);}
+$("#p1math").textContent=N+" ÷ "+R+" = "+q+(ok?"":" … 餘 "+rem);
+var c=$("#p1cap");if(ok){c.className="caption okc";c.innerHTML="剛好分完！"+R+" 和 "+q+" 都是 <strong class='f'>12 的因數</strong>。";}else{c.className="caption badc";c.innerHTML="還多出 "+rem+" 塊，無法剛好分完。<span class='muted'>"+N+" ÷ "+R+" = "+q+" … "+rem+"，有餘數便不是因數。</span>不要緊，這正是學習的好機會，再試其他數字！";}
+$("#p1chips").innerHTML=factors(12).map(function(f){return '<span class="nchip f">'+f+"</span>"}).join("");}
+$("#rMinus").onclick=function(){if(R>1)R--;p1()};$("#rPlus").onclick=function(){if(R<12)R++;p1()};p1();
+var RBP={1:12,12:1,2:6,6:2,3:4,4:3};
+$$("#rbRow .rbnum").forEach(function(b){b.onclick=function(){var v=+b.dataset.v,w=RBP[v];$$("#rbRow .rbnum").forEach(function(x){x.classList.toggle("on",+x.dataset.v===v||+x.dataset.v===w);});$$("#rbSvg path").forEach(function(p){p.classList.toggle("on",+p.dataset.a===Math.min(v,w));});$("#rbCap").innerHTML="因為 <strong class='n'>"+Math.min(v,w)+" × "+Math.max(v,w)+" = 12</strong>，所以 "+v+" 和 "+w+" 都是 12 的因數。";};});
+var RCC=["var(--factor)","var(--a)","var(--b)","var(--star)"];
+function num(s){return ((s)+"").replace(/[０-９]/g,function(c){return String.fromCharCode(c.charCodeAt(0)-65248);}).replace(/[\s,，、]/g,"").trim();}
+$("#rbGo").onclick=function(){
+var raw=num($("#rbN").value),N=parseInt(raw,10),cap=$("#rbCap2");
+if(!/^\d+$/.test(raw)||N<2||N>99){cap.className="caption badc";cap.innerHTML="請輸入 2 至 99 的整數。<br>"+cheer();return;}
+var fa=factors(N),k=fa.length,row=$("#rbRow2"),svg=$("#rbSvg2");
+row.style.gridTemplateColumns="repeat("+k+",1fr)";row.classList.toggle("many",k>8);row.innerHTML="";svg.innerHTML="";
+var pair={};for(var i=0;i<Math.floor(k/2);i++){pair[fa[i]]=fa[k-1-i];pair[fa[k-1-i]]=fa[i];}
+var mid=k%2?fa[(k-1)/2]:null;
+fa.forEach(function(v){var b=document.createElement("button");b.className="rbnum";b.type="button";b.textContent=v;b.dataset.v=v;b.onclick=function(){rbLight(N,fa,pair,v);};row.appendChild(b);});
+var NS="http://www.w3.org/2000/svg";
+for(var j=0;j<Math.floor(k/2);j++){var x1=(j+0.5)*600/k,x2=(k-0.5-j)*600/k,yTop=Math.min(8+j*24,100);var p=document.createElementNS(NS,"path");p.setAttribute("d","M"+x1+",122 Q300,"+yTop+" "+x2+",122");p.dataset.a=j;p.style.stroke=RCC[j%RCC.length];p.style.strokeWidth="2.5";p.style.opacity=".35";p.style.fill="none";svg.appendChild(p);}
+cap.className="caption okc";cap.innerHTML="<strong class='n'>"+N+"</strong> 的因數有："+fa.join("、")+"。按一按數字，看看它的配對。"+(mid?"其中 <strong class='n'>"+mid+"</strong> 是自己配對（"+mid+" × "+mid+" = "+N+"）。":"");
+};
+$("#rbN").addEventListener("keydown",function(e){if(e.key==="Enter")$("#rbGo").click();});
+function rbLight(N,fa,pair,v){
+var w=pair[v];
+$$("#rbRow2 .rbnum").forEach(function(x){var on=(+x.dataset.v===v||+x.dataset.v===w);x.classList.remove("on");x.style.background="";x.style.color="";x.style.borderColor="";if(on){var idx=Math.min(fa.indexOf(v),fa.indexOf(w));x.style.background=RCC[idx%RCC.length];x.style.color="#fff";x.style.borderColor="transparent";}});
+$$("#rbSvg2 path").forEach(function(p){var on=(+p.dataset.a===Math.min(fa.indexOf(v),fa.indexOf(w)));p.style.opacity=on?"1":".35";p.style.strokeWidth=on?"4":"2.5";});
+var cap=$("#rbCap2");
+if(w)cap.innerHTML="因為 <strong class='n'>"+Math.min(v,w)+" × "+Math.max(v,w)+" = "+N+"</strong>，所以 "+v+" 和 "+w+" 都是 "+N+" 的因數。";
+else cap.innerHTML="<strong class='n'>"+v+"</strong> 自己配對："+v+" × "+v+" = "+N+"。";
+}
+/* ---- P2 ---- */
+var K=3,A=12,B=18,found={};
+function renderBags(){["A","B"].forEach(function(){});
+var N1=A,N2=B;
+function bag(el,st,math,N,k,cls){var ok=N%k===0,q=Math.floor(N/k),rem=N%k;var d=$(el);d.innerHTML="";for(var i=0;i<N;i++){var s=document.createElement("span");var bad=!ok&&i>=N-rem;s.className="dot "+(bad?"left":cls);if(!ok&&!bad)s.classList.add("dim");s.textContent=(i%k)+1;d.appendChild(s);}
+$(st).textContent=ok?"剛好分完 ✓":"剩下 "+rem+" 塊 ✗";$(st).style.color=ok?"var(--ok)":"var(--bad)";
+$(math).innerHTML="<span class='n'>"+N+" ÷ "+k+" = "+q+(ok?"":" … "+rem)+"</span>";return ok;}
+$("#kOut").textContent=K;var okA=bag("#dotsA","#stA","#mathA",N1,K,"g"),okB=bag("#dotsB","#stB","#mathB",N2,K,"p");
+var c=$("#p2cap");
+if(okA&&okB){c.className="caption okc";c.innerHTML="兩袋都能剛好分完！<strong>"+K+" 是 "+A+" 和 "+B+" 的公因數</strong>。";found[K]=1;}
+else if(okA||okB){c.className="caption badc";c.innerHTML=(okA?"甲袋能剛好分完，但":"甲袋剩下 "+(N1%K)+" 塊，")+ (okB?"乙袋能剛好分完。":"乙袋剩下 "+(N2%K)+" 塊。")+"必須<strong>兩袋都能剛好分完</strong>才是公因數。不要緊，再試其他數字！";}
+else{c.className="caption badc";c.innerHTML="兩袋都有剩下（甲袋剩下 "+(N1%K)+"，乙袋剩下 "+(N2%K)+"），再試一次，不要放棄！";}
+function chips(el,arr,hl,gold){$(el).innerHTML=arr.map(function(f){var cls="nchip";if(gold&&f===gold)cls+=" gold";else if(hl&&hl[f])cls+=" hit";else if(el==="#chC")cls+=" f";return '<span class="'+cls+'">'+f+(gold&&f===gold?" 👑":"")+"</span>"}).join("");}
+chips("#chA",factors(A),okA?{[K]:1}:null,null);chips("#chB",factors(B),okB?{[K]:1}:null,null);
+var commons=factors(A).filter(function(f){return B%f===0});
+chips("#chC",commons,found,gcd(A,B));
+var L=factors(A).filter(function(f){return B%f!==0}),R2=factors(B).filter(function(f){return A%f!==0});
+$("#vLeft").innerHTML=L.map(function(f){return '<span class="nchip">'+f+"</span>"}).join("");
+$("#vRight").innerHTML=R2.map(function(f){return '<span class="nchip">'+f+"</span>"}).join("");
+var vm=$("#vMid");vm.innerHTML="";commons.forEach(function(f){if(found[f]){var s=document.createElement("span");s.className="nchip gold";s.textContent=f;vm.appendChild(s);}else{var b=document.createElement("button");b.className="q";b.textContent="?";b.title="試一試 "+f+" 人";b.onclick=function(){K=f;renderBags();};vm.appendChild(b);}});}
+$("#kMinus").onclick=function(){if(K>1)K--;renderBags()};$("#kPlus").onclick=function(){if(K<Math.max(A,B))K++;renderBags()};
+$("#kAuto").onclick=function(){found={};var k=Math.min(A,B);K=k;renderBags();var iv=setInterval(function(){k--;if(k<1){clearInterval(iv);return;}K=k;renderBags();if(K===gcd(A,B)){clearInterval(iv);}},450);};
+renderBags();
+/* ---- 溫氏圖挑戰：輸入因數 → 拖放歸位 ---- */
+var vA=12,vB=18,vUnion=[],vFound={},selChip=null;
+function vZone(v){var a=vA%v===0,b=vB%v===0;if(a&&b)return "zM";if(a)return "zL";if(b)return "zR";return "pool";}
+function vTable(f){var s=[];if(vA%f===0)s.push(vA+" = "+f+" × "+(vA/f));if(vB%f===0)s.push(vB+" = "+f+" × "+(vB/f));return s.join("；");}
+function vShowAnswer(){if(!vUnion.length)return;$("#vzAL").textContent="只屬於 "+vA+" 的因數";$("#vzAR").textContent="只屬於 "+vB+" 的因數";var L=vUnion.filter(function(f){return vZone(f)==="zL";}),M=vUnion.filter(function(f){return vZone(f)==="zM";}),R=vUnion.filter(function(f){return vZone(f)==="zR";});$("#vAnsL").innerHTML=L.map(function(f){return '<span class="nchip">'+f+"</span>"}).join("");$("#vAnsM").innerHTML=M.map(function(f){return '<span class="nchip gold">'+f+"</span>"}).join("");$("#vAnsR").innerHTML=R.map(function(f){return '<span class="nchip">'+f+"</span>"}).join("");$("#vAnsWrap").hidden=false;}
+function vRefreshProg(){var got=Object.keys(vFound).length,need=vUnion.length,p=$("#vProg");if(!need){p.className="caption";p.textContent="請先按「出題」。";return;}if(got>=need){p.className="caption okc";p.innerHTML="🎉 所有因數已齊全，可以拖入下面的溫氏圖內。";}else{p.className="caption";p.innerHTML="已找到 <strong class='n'>"+got+"</strong> ／ "+need+" 個因數，請繼續輸入。";}}
+function vMakeChip(v){var old=document.querySelector('.drag[data-v="'+v+'"]');if(old)return old;var c=document.createElement("button");c.className="drag";c.type="button";c.textContent=v;c.dataset.v=v;c.draggable=true;
+c.addEventListener("dragstart",function(e){try{e.dataTransfer.setData("text/plain",v);}catch(err){}selChip=c;});
+c.onclick=function(){if(selChip===c){c.classList.remove("sel");selChip=null;}else{if(selChip)selChip.classList.remove("sel");selChip=c;c.classList.add("sel");}};
+$("#vPool").appendChild(c);return c;}
+function vDeal(){
+var a=Math.max(2,Math.min(100,+((num($("#vAin").value))||12))),b=Math.max(2,Math.min(100,+((num($("#vBin").value))||18)));
+$("#vAin").value=a;$("#vBin").value=b;
+if(a===b){$("#vFb").className="caption badc";$("#vFb").textContent="不要緊，兩個數不可以相同，請更改其中一個再按「出題」。";return;}
+vA=a;vB=b;vFound={};var u={};factors(a).concat(factors(b)).forEach(function(f){u[f]=1;});vUnion=Object.keys(u).map(Number).sort(function(x,y){return x-y;});
+$("#vPool").innerHTML="";$("#vHintLog").innerHTML="";$("#vAnsWrap").hidden=true;["zL","zM","zR"].forEach(function(id){var z=document.getElementById(id);z.querySelectorAll(".drag").forEach(function(c){c.remove();});});
+$("#vFb").className="caption";$("#vFb").innerHTML="已出題：A＝<strong class='n'>"+a+"</strong>，B＝<strong class='n'>"+b+"</strong>。請在下面輸入你找到的因數。提示：<strong>1 一定是公因數</strong>。";
+$("#vzL").textContent="只屬於 "+a+" 的因數";$("#vzR").textContent="只屬於 "+b+" 的因數";
+vRefreshProg();}
+function vAddNum(){
+var raw=(num($("#vFind").value)).trim(),v=parseInt(raw,10),fb=$("#vFb");
+if(!/^\d+$/.test(raw)||!v||v<1){fb.className="caption badc";fb.innerHTML="請輸入一個正整數。<br>"+cheer();return;}
+if(!(vA%v===0||vB%v===0)){fb.className="caption badc";fb.innerHTML="<strong class='n'>"+v+"</strong> 既不是 "+vA+" 的因數，也不是 "+vB+" 的因數，請再想一想。<br>"+cheer();return;}
+if(vFound[v]){fb.className="caption";fb.innerHTML="<strong class='n'>"+v+"</strong> 已經在數字池內，不用重複加入。";return;}
+vFound[v]=1;vMakeChip(v);
+fb.className="caption okc";fb.innerHTML="正確！"+vTable(v)+"。";$("#vFind").value="";try{$("#vFind").focus();}catch(e){}
+vRefreshProg();}
+["vPool","zL","zM","zR"].forEach(function(id){var z=document.getElementById(id);
+z.addEventListener("dragover",function(e){e.preventDefault();z.classList.add("over");});
+z.addEventListener("dragleave",function(){z.classList.remove("over");});
+z.addEventListener("drop",function(e){e.preventDefault();z.classList.remove("over");var c=selChip;if(!c){var t=null;try{t=e.dataTransfer.getData("text/plain");}catch(err){}if(t)c=document.querySelector('.drag[data-v="'+t+'"]');}if(c){z.appendChild(c);c.classList.remove("sel");selChip=null;}});
+z.onclick=function(){if(selChip&&z.id!=="vPool"){z.appendChild(selChip);selChip.classList.remove("sel");selChip=null;}};});
+$("#vPool").onclick=function(e){var c=e.target.closest?e.target.closest(".drag"):null;if(c&&selChip&&selChip!==c){}else if(c&&selChip===c){}else if(selChip&&e.target.id==="vPool"){$("#vPool").appendChild(selChip);selChip.classList.remove("sel");selChip=null;}};
+$("#vGo").onclick=vDeal;
+$("#vReset").onclick=vDeal;
+$("#vAdd").onclick=vAddNum;
+$("#vFind").addEventListener("keydown",function(e){if(e.key==="Enter")vAddNum();});
+$("#vHint").onclick=function(){
+var miss=vUnion.filter(function(f){return !vFound[f];});
+if(!vUnion.length){$("#vFb").className="caption badc";$("#vFb").textContent="請先按「出題」。";return;}
+if(!miss.length){var d0=document.createElement("div");d0.className="caption";d0.textContent="已經全部找齊了，做得非常出色！";$("#vHintLog").appendChild(d0);return;}
+var f=miss[0];vFound[f]=1;vMakeChip(f);
+var d=document.createElement("div");d.className="caption";d.innerHTML="💡 提示：<strong class='n'>"+f+"</strong> 是答案之一，因為"+vTable(f)+"。已經為你放入數字池。";
+$("#vHintLog").appendChild(d);vRefreshProg();};
+$("#vCheck").onclick=function(){var zones={zL:[],zM:[],zR:[],pool:[]};["zL","zM","zR","vPool"].forEach(function(id){document.getElementById(id).querySelectorAll(".drag").forEach(function(c){zones[id==="vPool"?"pool":id].push(+c.dataset.v);});});
+var bad=[];["zL","zM","zR"].forEach(function(id){zones[id].forEach(function(v){if(vZone(v)!==id)bad.push(v);});});
+var missing=vUnion.filter(function(v){var z=document.getElementById(vZone(v));return z.querySelector('.drag[data-v="'+v+'"]')==null;});
+var stay=zones.pool.filter(function(v){return vZone(v)!=="pool";});
+var fb=$("#vFb");
+if(!vUnion.length){fb.className="caption badc";fb.textContent="請先按「出題」。";return;}
+if(!bad.length&&!stay.length&&!missing.length){var commons=vUnion.filter(function(f){return vZone(f)==="zM";});fb.className="caption okc";fb.innerHTML="🎉 全部正確！公因數是 <strong class='f'>"+commons.join("、")+"</strong>，最大公因數是 <strong class='n'>"+gcd(vA,vB)+"</strong>。";}
+else{fb.className="caption badc";var h=cheer()+"<br>尚未完全正確：";if(bad.length)h+="放錯圓圈："+bad.sort(function(x,y){return x-y}).join("、")+"；";if(stay.length)h+="數字池內還有未歸位的數："+stay.sort(function(x,y){return x-y}).join("、")+"；";if(missing.length)h+="還缺少："+missing.slice(0,8).join("、")+"。";h+="<br>請想一想：<strong>必須兩邊都能除盡，才可以放入中間</strong>。";fb.innerHTML=h;}vShowAnswer();};
+vDeal();
+/* ---- P3 ---- */
+$("#segL").onclick=function(){$("#segL").classList.add("on");$("#segS").classList.remove("on");$("#mList").hidden=false;$("#mShort").hidden=true;};
+$("#segS").onclick=function(){$("#segS").classList.add("on");$("#segL").classList.remove("on");$("#mList").hidden=true;$("#mShort").hidden=false;};
+$("#lA").innerHTML=factors(12).map(function(f){return '<span class="nchip f">'+f+"</span>"}).join("");
+$("#lB").innerHTML=factors(18).map(function(f){return '<span class="nchip f">'+f+"</span>"}).join("");
+var cA=12,cB=18,peeled=[];
+function shortBtns(){var g=[];for(var d=2;d<=Math.min(cA,cB);d++)if(cA%d===0&&cB%d===0)g.push(d);
+var box=$("#sBtns");box.innerHTML=g.length?"":'<span class="muted">已經沒有可以再剝的數（公因數只剩下 1），可以結算了！</span>';
+g.forEach(function(d){var b=document.createElement("button");b.className="btn";b.innerHTML='<span class="n">'+d+"</span>";b.onclick=function(){peel(d)};box.appendChild(b);});
+$("#sA").textContent=cA;$("#sB").textContent=cB;
+$("#sLog").textContent=peeled.length?peeled.join(" × "):"（未開始）";
+if(!g.length&&peeled.length){var h=peeled.reduce(function(x,y){return x*y},1);$("#sAns").innerHTML='🎉 完成！HCF = <span class="n f">'+peeled.join(" × ")+" = "+h+"</span>";}
+else if(!g.length){$("#sAns").innerHTML='🎉 本來已經沒有公因數（除了 1），HCF = <span class="n f">1</span>';}
+else $("#sAns").innerHTML="";}
+function peel(d){if(cA%d!==0||cB%d!==0){var c=$("#sCap");c.className="caption badc";c.innerHTML="<strong>"+d+" 不可以！</strong>"+(cA%d!==0?"甲袋 "+cA+" ÷ "+d+" 有餘數。":"")+(cB%d!==0?"乙袋 "+cB+" ÷ "+d+" 有餘數。":"")+"短除法必須兩邊都能除盡才可以除。再試一次，你一定做得到！";return;}
+peeled.push(d);cA/=d;cB/=d;var c=$("#sCap");c.className="caption okc";c.innerHTML="正確！兩邊都能除盡。繼續剝，看看還有沒有公因數。";shortBtns();}
+$("#sReset").onclick=function(){cA=12;cB=18;peeled=[];$("#sCap").className="caption";$("#sCap").textContent="按上面的數字開始剝皮。記住：<strong>必須兩邊都能除盡</strong>才可以剝。";shortBtns();};
+shortBtns();
+/* ---- P4 ---- */
+var score={r:0,t:0},cur="t1",LV=2,custom=null,hintLv=0;
+var H={t1:["想一想：公因數必須兩邊都能除盡。","試一試驗算 18 ÷ 6 能否除盡？","答案與 6 有關，請說明為甚麼兩邊都符合。"]};
+function updScore(){$("#score").textContent="答對 "+score.r+" / "+score.t+" 題";}
+function fb(ok,html){var d=document.createElement("div");d.className="feedback pop "+(ok?"okf":"badf");d.setAttribute("role","status");d.setAttribute("aria-live","polite");d.innerHTML=(ok?PRAISE[Math.floor(Math.random()*PRAISE.length)]+" ":cheer()+"<br>我們一起來看看。<br>")+html;$("#qFb").appendChild(d);}
+function pickPair(){if(custom)return custom;var mx=LV===1?30:LV===2?50:99;var a=2+Math.floor(Math.random()*(mx-2)),b=2+Math.floor(Math.random()*(mx-2));if(a===b)b=a===mx?2:a+1;return[a,b];}
+var TYPES=[["t1","認得"],["t2","點出公因數"],["t3","列出公因數"],["t4","求最大公因數"],["t5","選出正確推理"],["t6","捉錯"]];
+$("#typeRow").innerHTML="";TYPES.forEach(function(t){var b=document.createElement("button");b.className="pill"+(t[0]===cur?" on":"");b.textContent=t[1];b.onclick=function(){cur=t[0];$$("#typeRow .pill").forEach(function(x){x.classList.remove("on")});b.classList.add("on");newQ();};$("#typeRow").appendChild(b);});
+$$(".pill[data-lv]").forEach(function(p){p.onclick=function(){$$(".pill[data-lv]").forEach(function(x){x.classList.remove("on")});p.classList.add("on");LV=+p.dataset.lv;custom=null;newQ();}});
+$("#cSet").onclick=function(){var a=+$("#cA").value,b=+$("#cB").value;if(!(a>=2&&a<=99&&b>=2&&b<=99&&a!==b)){alert("請輸入兩個不同的數（2–99）");return;}custom=[a,b];newQ();};
+$("#scoreReset").onclick=function(){score={r:0,t:0};updScore();$("#qFb").innerHTML="";};
+var QA=null;
+function newQ(){$("#qFb").innerHTML="";$("#qHint").innerHTML="";hintLv=0;
+if(Math.random()<.3){var others=TYPES.map(function(t){return t[0]}).filter(function(t){return t!==cur});cur=others[Math.floor(Math.random()*others.length)];$$("#typeRow .pill").forEach(function(x){});}
+var p=pickPair(),a=p[0],b=p[1],g=gcd(a,b),fa=factors(a),fb2=factors(b),commons=fa.filter(function(f){return b%f===0});
+var T=$("#qTitle"),B=$("#qBody");B.innerHTML="";
+if(cur==="t1"){var isC=Math.random()<.5;var k=isC?commons[Math.floor(Math.random()*commons.length)]:g+1+Math.floor(Math.random()*5);if(a%k===0&&b%k===0)isC=true;else isC=false;QA=isC;
+T.innerHTML='<span class="n">'+k+'</span> 是 <span class="n">'+a+'</span> 和 <span class="n">'+b+'</span> 的公因數？';
+B.innerHTML='<div class="ox"><button class="btn" id="oT">○ 是</button><button class="btn" id="oF">✕ 不是</button></div>';
+$("#oT").onclick=function(){ans(true)};$("#oF").onclick=function(){ans(false)};
+function ans(v){var ok=v===isC;score.t++;if(ok)score.r++;updScore();fb(ok,(isC?"因為 "+a+" ÷ "+k+" 同 "+b+" ÷ "+k+" 都能除盡，所以是公因數。":"因為 "+a+" ÷ "+k+(a%k?" 有餘數":" 能除盡")+"，"+b+" ÷ "+k+(b%k?" 有餘數":" 能除盡")+"，必須兩邊都能除盡才是。"));}}
+else if(cur==="t2"){var M=Math.min(24,Math.max(a,b));QA=commons.slice();T.innerHTML='選出 <span class="n">'+a+'</span> 和 <span class="n">'+b+'</span> 的<span class="f">所有公因數</span>';
+var grid=document.createElement("div");grid.className="tapgrid";var sel={};for(var i=1;i<=M;i++){var btn=document.createElement("button");btn.textContent=i;btn.dataset.v=i;btn.onclick=function(){this.classList.toggle("on");var v=+this.dataset.v;if(sel[v])delete sel[v];else sel[v]=1;};grid.appendChild(btn);}
+var go=document.createElement("button");go.className="btn primary";go.textContent="交卷";go.style.marginTop="12px";go.onclick=function(){var got=Object.keys(sel).map(Number).sort(function(x,y){return x-y});var want=commons.filter(function(f){return f<=M});var ok=JSON.stringify(got)===JSON.stringify(want);score.t++;if(ok)score.r++;updScore();var miss=want.filter(function(f){return !sel[f]}),extra=got.filter(function(f){return want.indexOf(f)<0});fb(ok,"公因數是 "+want.join("、")+"。"+(ok?"":"你遺漏了："+(miss.join("、")||"沒有")+"；不是公因數但被選了："+(extra.join("、")||"沒有")+"。記住：1 一定要包括在內。"));};
+B.appendChild(grid);B.appendChild(go);}
+else if(cur==="t3"){QA=g;T.innerHTML='<span class="n">'+a+'</span> 和 <span class="n">'+b+'</span> 的公因數有哪些？（逐一選出）';
+var row=document.createElement("div");row.className="rowlist";var mx=Math.max(a,b);for(var j=1;j<=mx;j++){if(a%j!==0&&b%j!==0&&j>g+3)continue;var c2=document.createElement("button");c2.className="pill";c2.innerHTML='<span class="n">'+j+"</span>";c2.dataset.v=j;c2.onclick=function(){this.classList.toggle("on")};row.appendChild(c2);}
+var go2=document.createElement("button");go2.className="btn primary";go2.textContent="交卷";go2.style.marginTop="12px";go2.onclick=function(){var got=$$("#qBody .pill.on").map(function(e){return +e.dataset.v}).sort(function(x,y){return x-y});var ok=JSON.stringify(got)===JSON.stringify(commons);score.t++;if(ok)score.r++;updScore();fb(ok,"答案："+commons.join("、")+"，最大的是 "+g+"。");};
+B.appendChild(row);B.appendChild(go2);}
+else if(cur==="t4"){QA=g;T.innerHTML='<span class="n">'+a+'</span> 和 <span class="n">'+b+'</span> 的最大公因數是多少？';
+B.innerHTML='<input class="ans" id="ans4" inputmode="numeric"> <button class="btn primary" id="go4">確定</button><p class="muted">小幫手：先寫出兩邊的因數，或用剝皮機由小數開始倒數。最大的一個才是答案。</p>';
+$("#go4").onclick=function(){var v=+$("#ans4").value;var ok=v===g;score.t++;if(ok)score.r++;updScore();if(!ok&&commons.indexOf(v)>=0)fb(false,"<strong>"+v+" 是公因數沒有錯，但不是最大的！</strong>由 "+Math.min(a,b)+" 開始倒數，第一個兩邊都符合的才是。答案是 "+g+"。");else if(!ok&&v>a&&v>b)fb(false,"<strong>"+v+" 那是求公倍數的想法。</strong>記住：倍數數不完，因數才能數得完。答案是 "+g+"。");else fb(ok,"HCF = "+g+"（公因數 "+commons.join("、")+" 中最大的一個）。");};}
+else if(cur==="t5"){QA="B";T.innerHTML='為甚麼 <span class="n">4</span> 不是 <span class="n">12</span> 和 <span class="n">18</span> 的公因數？';
+var opts=["A．因為 4 比 6 小","B．因為 18 ÷ 4 有餘數，兩邊並非都能除盡","C．因為 4 不是 12 的因數","D．因為公因數一定是雙數"];var ch=document.createElement("div");ch.className="choices";opts.forEach(function(o){var btn=document.createElement("button");btn.className="btn";btn.textContent=o;btn.onclick=function(){var ok=o.charAt(0)==="B";score.t++;if(ok)score.r++;updScore();fb(ok,"12 ÷ 4 = 3 能除盡，但 18 ÷ 4 = 4 … 2 有餘數。<strong>必須兩邊都能除盡</strong>才是公因數。");};ch.appendChild(btn);});B.appendChild(ch);}
+else{QA="C";T.innerHTML='小明用剝皮機求 12 和 18：<span class="n">12 ÷ 4 = 3，18 ÷ 4 = 4 … 2</span>，他照樣剝下去。錯在哪裡？';
+var o2=["A．不應該用除法","B．答案要寫 3 和 4","C．4 不是 18 的因數，兩邊並非都能除盡，不可以剝","D．應該一次過除以 12"];var ch2=document.createElement("div");ch2.className="choices";o2.forEach(function(o){var btn=document.createElement("button");btn.className="btn";btn.textContent=o;btn.onclick=function(){var ok=o.charAt(0)==="C";score.t++;if(ok)score.r++;updScore();fb(ok,"剝皮機的規則：<strong>必須兩邊都能除盡</strong>。4 是 12 的因數，但不是 18 的因數，所以不能剝。應該選擇 2 或 3。");};ch2.appendChild(btn);});B.appendChild(ch2);}
+if(score.t>0&&score.t%10===0){var d=document.createElement("div");d.className="card";d.innerHTML="<h3>本次成績</h3><p class='lead'>總共答對 <strong class='n'>"+score.r+"</strong> / "+score.t+" 題。</p>";$("#qFb").appendChild(d);}}
+$("#nextBtn").onclick=function(){if(Math.random()<.15){}newQ();};
+$("#hintBtn").onclick=function(){var arr=H[Object.keys(H)[0]];var d=document.createElement("div");d.className="caption";d.textContent=arr[Math.min(hintLv,arr.length-1)];$("#qHint").appendChild(d);hintLv++;};
+newQ();
+})();
+</script></body></html>
